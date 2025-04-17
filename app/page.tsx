@@ -17,7 +17,11 @@ export default function Home() {
             const fullLink = location.origin + "/" + result.alias;
             setShortUrl(fullLink);
         } catch (err) {
-            setError(err.message || "Error");
+            if (err instanceof Error) {
+                setError(err.message);
+            } else {
+                setError("There has been an error");
+            }
         }
     }
 
