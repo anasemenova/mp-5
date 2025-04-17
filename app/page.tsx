@@ -46,8 +46,7 @@ export default function Home() {
                 <button
                     onClick={shortenLink}
                     className="p-3 bg-blue-600 text-white rounded hover:bg-blue-700"
-                >
-                    Shorten
+                >Shorten
                 </button>
             </div>
 

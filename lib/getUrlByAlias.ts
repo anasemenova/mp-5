@@ -1,13 +1,14 @@
+
 import getCollection, {URLS_COLLECTION} from "@/db";
 
-export type UrlDoc = {
+export type Url = {
     alias: string;
     url: string;
 };
 
 export default async function getUrlByAlias(
     alias: string
-): Promise<UrlDoc | null> {
+): Promise<Url | null> {
     const urlsCollection = await getCollection(URLS_COLLECTION);
     const data = await urlsCollection.findOne({ alias });
 

@@ -1,11 +1,8 @@
+//part of this code and its logic is from Jeffrey's example from discussion
 "use server";
-
 import getCollection, { URLS_COLLECTION } from "@/db";
 
-export default async function createShortUrl(
-    alias: string,
-    url: string
-): Promise<{ alias: string; url: string }> {
+export default async function createShortUrl(alias: string, url: string): Promise<{ alias: string; url: string }> {
     console.log("creating new short url");
 
     if (!alias || alias.trim() === "") {
@@ -30,19 +27,19 @@ export default async function createShortUrl(
     }
 
     const urlCollection = await getCollection(URLS_COLLECTION);
-    const existing = await urlCollection.findOne({ alias });
+    const existing = await urlCollection.findOne({alias});
 
     if (existing) {
         throw new Error("Invalid alias: This alias already exists");
     }
 
-    const doc = { alias, url };
+    const doc = {alias, url};
     const res = await urlCollection.insertOne(doc);
 
     if (!res.acknowledged) {
         throw new Error("DB insert failed");
     }
 
-    return { alias, url };
+    return {alias, url};
 
 }
