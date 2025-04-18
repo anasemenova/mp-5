@@ -14,14 +14,16 @@ export default function Home() {
 
         try {
             const result = await createShortUrl(alias, url);
-            const fullLink = location.origin + "/" + result.alias;
-            setShortUrl(fullLink);
-        } catch (err) {
-            if (err instanceof Error) {
-                setError(err.message);
-            } else {
-                setError("There has been an error");
+
+            if (typeof result === "string") {
+                setError(result);
+                return;
             }
+
+            const fullLink = window.location.origin + "/" + result.alias;
+            setShortUrl(fullLink);
+        } catch {
+            setError("There has been an error.");
         }
     }
 
